@@ -12,44 +12,45 @@ struct Favourites: View {
     @State private var favoriteMovies: [Movie] = []
     var body: some View {
         
-        
-        VStack{
-            ScrollView{
-                
-                ForEach(favoriteMovies) { movie in
-                    HStack{
-                        NavigationLink(destination: InfoView(movie: movie)){
-                            if let posterURL = movie.posterURL {
-                                AsyncImage(url: posterURL) { image in
-                                    image
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(width: 50, height: 80, alignment: .center)
-                                        .cornerRadius(10.0)
-                                        .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 2)
-                                    
-                                } placeholder: {
-                                    ProgressView()
-                                }
-                            } else {
-                                Text("No Image Available")
+        List {
+            ForEach(favoriteMovies) { movie in
+                HStack {
+                    NavigationLink(destination: InfoView(movie: movie)) {
+                        if let posterURL = movie.posterURL {
+                            AsyncImage(url: posterURL) { image in
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 50, height: 80)
+                                    .cornerRadius(10.0)
+                                    .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 2)
+                            } placeholder: {
+                                ProgressView()
                             }
-                            
-                            Text(movie.title)
-                                .font(.title)
-                                .fontWeight(.medium)
-                                .foregroundColor(.black)
+                        } else {
+                            Text("No Image Available")
                         }
-                        Image(systemName: "xmark.circle")
-                            .frame(width: 40, height: 40)
-                            .foregroundColor(.red)
-                            .onTapGesture {
-                                removeFavoriteMovie(movie)
-                            }
+                        
+                        Text(movie.title)
+                            .font(.title)
+                            .fontWeight(.medium)
+                            .foregroundColor(.black)
                     }
+                    
+                    Spacer()
+                    
+                    Image(systemName: "xmark.circle")
+                        .frame(width: 40, height: 40)
+                        .foregroundColor(.red)
+                        .onTapGesture {
+                            removeFavoriteMovie(movie)
+                        }
                 }
+                .padding(.vertical, 8)
+                .listRowInsets(EdgeInsets())
             }
-        }.onAppear{
+        }
+        .onAppear {
             updateFavoriteMovies()
         }
     }

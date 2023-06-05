@@ -18,14 +18,7 @@ struct SearchView: View {
                 .padding(.vertical, 10)
                 .background(Color.gray.opacity(0.2))
                 .cornerRadius(8)
-                .overlay(
-                    HStack {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(.gray)
-                            .padding(.leading, 8)
-                        Spacer()
-                    }
-                )
+            
                 .padding(.horizontal)
             
             if vm.filteredMovies.isEmpty {
@@ -59,20 +52,7 @@ struct MoviesGridView: View {
     
     var body: some View {
         
-        HStack {
-            Spacer()
-            Button(action: {
-                isSortingAscending.toggle()
-            }) {
-                Text(isSortingAscending ? "Sort by top ratings" : "sort by lowest ratings")
-                    .background(Color.black)
-                            .foregroundColor(.white)
-                            .padding(10)
-                            .frame(maxWidth: .infinity)
-                            .cornerRadius(20.0)
-            }
-           
-        }
+    
         
         LazyVGrid(columns: gridLayout, spacing: 10) {
             ForEach(sortedMovies) { movie in

@@ -63,7 +63,10 @@ struct InfoView: View {
                     }) {
                         
                         Image(systemName: isFavorite ? "heart.fill" : "heart")
+                            .resizable()
                             .foregroundColor(.red)
+                            
+                            .frame(width:25, height: 25)
                     }
                 }
                 
@@ -73,8 +76,9 @@ struct InfoView: View {
                             image
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                                .frame(maxWidth: 300)
-                                .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 2)
+                                .frame(maxWidth: 250)
+                                .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 5)
+                                .cornerRadius(15.0)
                         } placeholder: {
                             ProgressView()
                         }
@@ -83,24 +87,41 @@ struct InfoView: View {
                     }
                     VStack{
                         Text(movie.releaseDate ?? "cant find release date")
+                            .font(.caption)
+                            .fontWeight(.bold)
+                            .foregroundColor(.black)
+                            .padding(.vertical, 4)
+                            .padding(.horizontal, 8)
+                            .background(Color.gray.opacity(0.2))
+                            .cornerRadius(8)
+                            .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 5)
                         VStack{
                             ForEach(genreNames, id: \.self) { genreName in
                                 Text(genreName)
                                     .font(.caption)
-                                    .foregroundColor(.gray)
+                                    .foregroundColor(.black)
                                     .padding(.vertical, 4)
                                     .padding(.horizontal, 8)
                                     .background(Color.gray.opacity(0.2))
                                     .cornerRadius(8)
+                                    .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 5)
                             }
                         }
                         
                         Text(movie.originalLanguage)
+                            .font(.caption)
+                            .foregroundColor(.black)
+                            .padding(.vertical, 4)
+                            .padding(.horizontal, 8)
+                            .background(Color.gray.opacity(0.2))
+                            .cornerRadius(8)
+                            .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 5)
                     }
                     
                 }
                 Text(movie.overview)
                     .font(.body)
+                    .padding()
                 Text("Trailer")
                     .font(.title)
                 if let firstTrailer = infoVm.trailers.first {
@@ -113,7 +134,7 @@ struct InfoView: View {
                     Text("Loading trailer")
                 }
                 
-                Text("Cast:")
+                Text("Actors")
                     .font(.title)
                 Spacer()
                 LazyVGrid(columns: [
@@ -123,6 +144,7 @@ struct InfoView: View {
                 ], spacing: 16) {
                     ForEach(infoVm.cast, id: \.id) { actor in
                         Text(actor.name)
+                            .font(.caption)
                         
                     }
                 }

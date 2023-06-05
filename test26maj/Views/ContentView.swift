@@ -22,10 +22,7 @@ struct ContentView: View {
             TabView(selection: $selectedTab){
                 VStack{
                     ScrollView{
-                        BouncyArrowView(rotationAngle: Angle(degrees: 90))
-                                       .frame(width: 100, height: 100)
-                                       .offset(x: 50, y: 50)
-                                                       .allowsHitTesting(false)
+                     
                         CategoryView(title: "Now Playing", movies: vm.nowPlayingMovies)
                         ContentMoviesGridView(movies: vm.topRatedMovies)
                         CategoryView(title: "Top Rated Movies Imdb", movies: vm.topRatedMovies)
@@ -53,14 +50,24 @@ struct ContentView: View {
                 
                 
             }
-            .navigationBarTitle("Movies")
+            .navigationTitle("Movies")
             .environmentObject(favoriteMoviesManager)
             .environmentObject(vm)
             .onAppear{
-                vm.fetchPopularMovies()
-                vm.fetchTrendingMovies()
-                vm.fetchTopRatedMovies()
-                vm.fetchNowPlayingMovies()
+                
+                if vm.popularMovies.isEmpty {
+                                vm.fetchPopularMovies()
+                            }
+                            if vm.trending.isEmpty {
+                                vm.fetchTrendingMovies()
+                            }
+                            if vm.topRatedMovies.isEmpty {
+                                vm.fetchTopRatedMovies()
+                            }
+                            if vm.nowPlayingMovies.isEmpty {
+                                vm.fetchNowPlayingMovies()
+                            }
+              
                 
             }
         }
@@ -85,16 +92,21 @@ struct ContentMoviesGridView: View {
         
         HStack {
             Spacer()
+            Text("Top on Imdb")
+                .font(.title)
+                .fontWeight(.bold)
             Button(action: {
                 isSortingAscending.toggle()
             }) {
-                Text(isSortingAscending ? "Sort by top ratings" : "sort by lowest ratings")
-                    .background(Color.black)
+                Text(isSortingAscending ? "Sort by top ratings" : "Sort by lowest ratings")
+                   
                             .foregroundColor(.white)
-                            .padding(10)
-                            .frame(maxWidth: .infinity)
-                            .cornerRadius(20.0)
-            }
+                          
+            }.buttonStyle(BorderedButtonStyle())
+                .background(Color.black)
+                .cornerRadius(13.0)
+              
+          
            
         }
         
@@ -109,8 +121,12 @@ struct ContentMoviesGridView: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .cornerRadius(10.0)
+                                    .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 2)
                                 
-                            } placeholder: {
+                            }
+                            
+                            
+                        placeholder: {
                                 ProgressView()
                             }
                         } else {

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		A923BD1B2A29DFA30082EBDA /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A923BD1A2A29DFA30082EBDA /* Actor.swift */; };
 		A923BD1D2A29DFB30082EBDA /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = A923BD1C2A29DFB30082EBDA /* Genre.swift */; };
-		A923BD1F2A2DB4EE0082EBDA /* BouncyArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A923BD1E2A2DB4EE0082EBDA /* BouncyArrowView.swift */; };
 		A92ECEE22A20AE97008B7D45 /* test26majApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92ECEE12A20AE97008B7D45 /* test26majApp.swift */; };
 		A92ECEE42A20AE97008B7D45 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92ECEE32A20AE97008B7D45 /* ContentView.swift */; };
 		A92ECEE62A20AE99008B7D45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A92ECEE52A20AE99008B7D45 /* Assets.xcassets */; };
@@ -51,7 +50,6 @@
 /* Begin PBXFileReference section */
 		A923BD1A2A29DFA30082EBDA /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		A923BD1C2A29DFB30082EBDA /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
-		A923BD1E2A2DB4EE0082EBDA /* BouncyArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncyArrowView.swift; sourceTree = "<group>"; };
 		A92ECEDE2A20AE97008B7D45 /* test26maj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test26maj.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A92ECEE12A20AE97008B7D45 /* test26majApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test26majApp.swift; sourceTree = "<group>"; };
 		A92ECEE32A20AE97008B7D45 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -191,7 +189,6 @@
 				A92ECF232A24E4E9008B7D45 /* HomeScreen.swift */,
 				A92ECF252A24E538008B7D45 /* Favourites.swift */,
 				A9BFCB332A28C23600F97E2C /* WebView.swift */,
-				A923BD1E2A2DB4EE0082EBDA /* BouncyArrowView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -350,7 +347,6 @@
 				A923BD1B2A29DFA30082EBDA /* Actor.swift in Sources */,
 				A92ECEEE2A20AE99008B7D45 /* test26maj.xcdatamodeld in Sources */,
 				A92ECF2B2A260268008B7D45 /* FavoriteMoviesManager.swift in Sources */,
-				A923BD1F2A2DB4EE0082EBDA /* BouncyArrowView.swift in Sources */,
 				A92ECEE22A20AE97008B7D45 /* test26majApp.swift in Sources */,
 				A92ECF202A24E20C008B7D45 /* InfoView.swift in Sources */,
 				A9BFCB342A28C23600F97E2C /* WebView.swift in Sources */,
