@@ -20,6 +20,7 @@ struct SearchView: View {
                 .cornerRadius(8)
             
                 .padding(.horizontal)
+                .disableAutocorrection(true)
             
             if vm.filteredMovies.isEmpty {
                 Text("No movies found.")
@@ -27,10 +28,15 @@ struct SearchView: View {
                     .padding()
             } else {
                 ScrollView{
-                   
-                    MoviesGridView(movies: vm.filteredMovies)
+                    
+                    MoviesGridView(movies: vm.filteredMovies,vm: vm)
                 }
             }
+        }.onAppear{
+           
+                        
+                        vm.searchQuery = ""
+                    
         }
         
     }
@@ -38,6 +44,7 @@ struct SearchView: View {
 
 struct MoviesGridView: View {
     let movies: [Movie]
+    let vm : MoviesViewModel
     @State private var isSortingAscending = true
     var sortedMovies: [Movie] {
         if isSortingAscending {
@@ -52,11 +59,11 @@ struct MoviesGridView: View {
     
     var body: some View {
         
-    
+        
         
         LazyVGrid(columns: gridLayout, spacing: 10) {
             ForEach(sortedMovies) { movie in
-                        let itemID = UUID()
+                let itemID = UUID()
                 VStack {
                     NavigationLink(destination: InfoView(movie: movie)) {
                         if let posterURL = movie.posterURL {
@@ -84,6 +91,7 @@ struct MoviesGridView: View {
                     
                     
                 }.id(itemID)
+                   
             }
         }
         .padding()

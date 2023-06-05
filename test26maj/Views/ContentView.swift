@@ -19,58 +19,64 @@ struct ContentView: View {
         
         NavigationView{
             ZStack{
-            TabView(selection: $selectedTab){
-                VStack{
-                    ScrollView{
-                     
-                        CategoryView(title: "Now Playing", movies: vm.nowPlayingMovies)
-                        ContentMoviesGridView(movies: vm.topRatedMovies)
-                        CategoryView(title: "Top Rated Movies Imdb", movies: vm.topRatedMovies)
-                        CategoryView(title: "Popular", movies: vm.popularMovies)
-                        CategoryView(title: "Trending", movies: vm.trending)
+                Color.black.edgesIgnoringSafeArea(.all)
+                TabView(selection: $selectedTab){
+                    VStack{
+                        ScrollView{
+                            
+                            CategoryView(title: "Now Playing", movies: vm.nowPlayingMovies)
+                            ContentMoviesGridView(movies: vm.topRatedMovies)
+                            CategoryView(title: "Top Rated Movies Imdb", movies: vm.topRatedMovies)
+                            CategoryView(title: "Popular", movies: vm.popularMovies)
+                            CategoryView(title: "Trending", movies: vm.trending)
+                        }
                     }
-                }
-                .tabItem {
-                    Label("Home", systemImage: "house")
-                }
-                .tag(0)
-                
-                SearchView(vm: vm)
-                
                     .tabItem {
-                        Label("Search", systemImage: "magnifyingglass")
+                        Label("Home", systemImage: "house")
                     }
-                    .tag(1)
+                    .tag(0)
+                    
+                    SearchView(vm: vm)
+                    
+                        .tabItem {
+                            Label("Search", systemImage: "magnifyingglass")
+                        }
+                        .tag(1)
+                    
+                    Favourites()
+                        .tabItem {
+                            Label("Favorites", systemImage: "heart")
+                        }
+                        .tag(2)
+                    
+                    
+                }
+                .navigationTitle("Movies")
+                .environmentObject(favoriteMoviesManager)
+                .environmentObject(vm)
                 
-                Favourites()
-                    .tabItem {
-                        Label("Favorites", systemImage: "heart")
+                
+                .onAppear{
+                    
+                    if vm.popularMovies.isEmpty {
+                        vm.fetchPopularMovies()
                     }
-                    .tag(2)
+                    if vm.trending.isEmpty {
+                        vm.fetchTrendingMovies()
+                    }
+                    if vm.topRatedMovies.isEmpty {
+                        vm.fetchTopRatedMovies()
+                    }
+                    if vm.nowPlayingMovies.isEmpty {
+                        vm.fetchNowPlayingMovies()
+                    }
+                    
+                    
+                }
                 
-                
-            }
-            .navigationTitle("Movies")
-            .environmentObject(favoriteMoviesManager)
-            .environmentObject(vm)
-            .onAppear{
-                
-                if vm.popularMovies.isEmpty {
-                                vm.fetchPopularMovies()
-                            }
-                            if vm.trending.isEmpty {
-                                vm.fetchTrendingMovies()
-                            }
-                            if vm.topRatedMovies.isEmpty {
-                                vm.fetchTopRatedMovies()
-                            }
-                            if vm.nowPlayingMovies.isEmpty {
-                                vm.fetchNowPlayingMovies()
-                            }
-              
-                
-            }
-        }
+            }.tabViewStyle(DefaultTabViewStyle())
+                .accentColor(.black)
+                .background(Color.white)
         }
     }
 }
@@ -99,20 +105,20 @@ struct ContentMoviesGridView: View {
                 isSortingAscending.toggle()
             }) {
                 Text(isSortingAscending ? "Sort by top ratings" : "Sort by lowest ratings")
-                   
-                            .foregroundColor(.white)
-                          
+                
+                    .foregroundColor(.white)
+                
             }.buttonStyle(BorderedButtonStyle())
                 .background(Color.black)
                 .cornerRadius(13.0)
-              
-          
-           
+            
+            
+            
         }
         
         LazyVGrid(columns: gridLayout, spacing: 10) {
             ForEach(sortedMovies) { movie in
-                        let itemID = UUID()
+                let itemID = UUID()
                 VStack {
                     NavigationLink(destination: InfoView(movie: movie)) {
                         if let posterURL = movie.posterURL {
@@ -127,8 +133,8 @@ struct ContentMoviesGridView: View {
                             
                             
                         placeholder: {
-                                ProgressView()
-                            }
+                            ProgressView()
+                        }
                         } else {
                             Text("No Image Available")
                         }

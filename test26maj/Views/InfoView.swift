@@ -26,7 +26,7 @@ struct InfoView: View {
         self.movie = movie
         _isFavorite = State(initialValue: FavoriteMoviesManager.isMovieFavorite(movie))
         self.infoVm = InfoViewModel()
-       
+        
         
     }
     
@@ -65,7 +65,7 @@ struct InfoView: View {
                         Image(systemName: isFavorite ? "heart.fill" : "heart")
                             .resizable()
                             .foregroundColor(.red)
-                            
+                        
                             .frame(width:25, height: 25)
                     }
                 }
